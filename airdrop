@@ -1,0 +1,39 @@
+<section class="airdrop-section">
+
+  <h2>Base Airdrop Claim</h2>
+
+  <p>
+    Eligible users can connect their wallet and claim available Base ecosystem rewards.
+  </p>
+
+  <div class="airdrop-card">
+
+    <div class="airdrop-info">
+
+      <h3>Season 1 Rewards</h3>
+
+      <p>
+        Check your eligibility for ecosystem incentives, builder rewards,
+        NFT bonuses, and community allocations.
+      </p>
+
+      <ul>
+        <li>✔ Builder Rewards</li>
+        <li>✔ NFT Holder Bonus</li>
+        <li>✔ Community Incentives</li>
+        <li>✔ Base Ecosystem Drops</li>
+      </ul>
+
+      <button onclick="claimAirdrop()">
+        Claim Airdrop
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="claim-result" id="claimResult">
+    Wallet not connected.
+  </div>
+
+</section>
