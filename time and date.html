@@ -1,0 +1,56 @@
+<!-- DATE & TIME -->
+<div class="datetime-box">
+  <h2 id="time"></h2>
+  <p id="date"></p>
+</div>
+
+<style>
+  .datetime-box{
+    width: fit-content;
+    padding: 15px 25px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  #time{
+    font-size: 2rem;
+    margin: 0;
+    font-weight: bold;
+  }
+
+  #date{
+    margin-top: 5px;
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+</style>
+
+<script>
+  function updateDateTime() {
+    const now = new Date();
+
+    const time = now.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+    const date = now.toLocaleDateString([], {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    document.getElementById("time").textContent = time;
+    document.getElementById("date").textContent = date;
+  }
+
+  updateDateTime();
+  setInterval(updateDateTime, 1000);
+</script>

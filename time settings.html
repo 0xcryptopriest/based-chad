@@ -1,0 +1,182 @@
+<!-- DATE & TIME WITH SETTINGS -->
+<div class="datetime-container">
+
+  <div class="datetime-box">
+    <h2 id="time"></h2>
+    <p id="date"></p>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="settings-box">
+    <h3>Clock Settings</h3>
+
+    <label>
+      Time Format
+      <select id="formatSelect">
+        <option value="12">12 Hour</option>
+        <option value="24">24 Hour</option>
+      </select>
+    </label>
+
+    <label>
+      Show Seconds
+      <select id="secondsSelect">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </label>
+
+    <label>
+      Theme
+      <select id="themeSelect">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+        <option value="blue">Blue</option>
+      </select>
+    </label>
+
+  </div>
+
+</div>
+
+<style>
+  body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0f172a;
+    font-family:Arial,sans-serif;
+    transition:0.3s;
+  }
+
+  .datetime-container{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+
+  .datetime-box,
+  .settings-box{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:25px;
+    color:white;
+    box-shadow:0 5px 25px rgba(0,0,0,0.3);
+  }
+
+  .datetime-box{
+    min-width:280px;
+    text-align:center;
+  }
+
+  #time{
+    font-size:2.5rem;
+    margin:0;
+  }
+
+  #date{
+    margin-top:10px;
+    opacity:0.8;
+  }
+
+  .settings-box{
+    width:220px;
+  }
+
+  .settings-box h3{
+    margin-top:0;
+    margin-bottom:20px;
+  }
+
+  .settings-box label{
+    display:block;
+    margin-bottom:18px;
+    font-size:14px;
+  }
+
+  .settings-box select{
+    width:100%;
+    margin-top:6px;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#1e293b;
+    color:white;
+    outline:none;
+  }
+
+  /* LIGHT THEME */
+  body.light{
+    background:#f1f5f9;
+  }
+
+  body.light .datetime-box,
+  body.light .settings-box{
+    background:white;
+    color:black;
+  }
+
+  body.light select{
+    background:#e2e8f0;
+    color:black;
+  }
+
+  /* BLUE THEME */
+  body.blue{
+    background:linear-gradient(135deg,#0f172a,#2563eb);
+  }
+</style>
+
+<script>
+  const timeElement = document.getElementById("time");
+  const dateElement = document.getElementById("date");
+
+  const formatSelect = document.getElementById("formatSelect");
+  const secondsSelect = document.getElementById("secondsSelect");
+  const themeSelect = document.getElementById("themeSelect");
+
+  function updateClock() {
+    const now = new Date();
+
+    const is24Hour = formatSelect.value === "24";
+    const showSeconds = secondsSelect.value === "yes";
+
+    const timeOptions = {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: !is24Hour
+    };
+
+    if(showSeconds){
+      timeOptions.second = '2-digit';
+    }
+
+    const time = now.toLocaleTimeString([], timeOptions);
+
+    const date = now.toLocaleDateString([], {
+      weekday:'long',
+      year:'numeric',
+      month:'long',
+      day:'numeric'
+    });
+
+    timeElement.textContent = time;
+    dateElement.textContent = date;
+  }
+
+  function updateTheme(){
+    document.body.className = themeSelect.value;
+  }
+
+  formatSelect.addEventListener("change", updateClock);
+  secondsSelect.addEventListener("change", updateClock);
+  themeSelect.addEventListener("change", updateTheme);
+
+  updateClock();
+  updateTheme();
+
+  setInterval(updateClock,1000);
+</script>
