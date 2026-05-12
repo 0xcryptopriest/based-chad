@@ -1,0 +1,89 @@
+<!-- FONT SETTINGS -->
+<div class="font-settings">
+
+  <label>
+    Font Style
+    <select id="fontStyle">
+      <option value="Arial">Arial</option>
+      <option value="Courier New">Courier New</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Verdana">Verdana</option>
+      <option value="Tahoma">Tahoma</option>
+      <option value="Poppins">Poppins</option>
+    </select>
+  </label>
+
+  <label>
+    Font Size
+    <input type="range" id="fontSize" min="12" max="40" value="16">
+  </label>
+
+  <label>
+    Font Color
+    <input type="color" id="fontColor" value="#ffffff">
+  </label>
+
+</div>
+
+<style>
+
+  .font-settings{
+    margin-bottom:18px;
+  }
+
+  .font-settings label{
+    display:block;
+    margin-bottom:14px;
+    font-size:14px;
+    color:white;
+  }
+
+  .font-settings select,
+  .font-settings input[type="range"]{
+    width:100%;
+    margin-top:6px;
+    padding:10px;
+    border:none;
+    border-radius:12px;
+    background:#1e293b;
+    color:white;
+    outline:none;
+  }
+
+  .font-settings input[type="color"]{
+    width:100%;
+    height:45px;
+    margin-top:6px;
+    border:none;
+    border-radius:12px;
+    background:#1e293b;
+    cursor:pointer;
+  }
+
+</style>
+
+<script>
+
+  const fontStyle = document.getElementById("fontStyle");
+  const fontSize = document.getElementById("fontSize");
+  const fontColor = document.getElementById("fontColor");
+
+  function applyFontSettings(){
+
+    const style = fontStyle.value;
+    const size = fontSize.value + "px";
+    const color = fontColor.value;
+
+    document.body.style.fontFamily = style;
+    document.body.style.fontSize = size;
+    document.body.style.color = color;
+
+  }
+
+  fontStyle.addEventListener("change", applyFontSettings);
+  fontSize.addEventListener("input", applyFontSettings);
+  fontColor.addEventListener("input", applyFontSettings);
+
+  applyFontSettings();
+
+</script>
