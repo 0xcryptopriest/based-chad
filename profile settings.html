@@ -1,0 +1,230 @@
+<!-- PROFILE SETTINGS PANEL -->
+<div class="profile-settings">
+
+  <div class="profile-card">
+    <img 
+      id="profileImage"
+      src="https://i.pravatar.cc/150?img=12"
+      alt="Profile"
+    >
+
+    <h2 id="profileName">0xcryptopriest</h2>
+    <p id="profileBio">Web3 Builder • Airdrop Hunter • Base Ecosystem</p>
+  </div>
+
+  <div class="settings-card">
+    <h3>Profile Settings</h3>
+
+    <label>
+      Username
+      <input type="text" id="nameInput" placeholder="Enter username">
+    </label>
+
+    <label>
+      Bio
+      <textarea id="bioInput" placeholder="Enter bio"></textarea>
+    </label>
+
+    <label>
+      Profile Image URL
+      <input type="text" id="imageInput" placeholder="Paste image URL">
+    </label>
+
+    <label>
+      Theme
+      <select id="themeSelect">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+        <option value="purple">Purple</option>
+      </select>
+    </label>
+
+    <button id="saveBtn">
+      Save Changes
+    </button>
+  </div>
+
+</div>
+
+<style>
+  body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0f172a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    transition:0.3s;
+  }
+
+  .profile-settings{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+  }
+
+  .profile-card,
+  .settings-card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-radius:20px;
+    padding:25px;
+    color:white;
+    box-shadow:0 5px 25px rgba(0,0,0,0.3);
+  }
+
+  .profile-card{
+    width:280px;
+    text-align:center;
+  }
+
+  .profile-card img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid rgba(255,255,255,0.2);
+  }
+
+  .profile-card h2{
+    margin:15px 0 5px;
+  }
+
+  .profile-card p{
+    opacity:0.8;
+    font-size:14px;
+  }
+
+  .settings-card{
+    width:320px;
+  }
+
+  .settings-card h3{
+    margin-top:0;
+    margin-bottom:20px;
+  }
+
+  label{
+    display:block;
+    margin-bottom:18px;
+    font-size:14px;
+  }
+
+  input,
+  textarea,
+  select{
+    width:100%;
+    margin-top:6px;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#1e293b;
+    color:white;
+    outline:none;
+    box-sizing:border-box;
+  }
+
+  textarea{
+    resize:none;
+    height:80px;
+  }
+
+  button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+    font-weight:bold;
+    font-size:15px;
+    transition:0.3s;
+  }
+
+  button:hover{
+    transform:translateY(-2px);
+  }
+
+  /* LIGHT THEME */
+  body.light{
+    background:#f1f5f9;
+  }
+
+  body.light .profile-card,
+  body.light .settings-card{
+    background:white;
+    color:black;
+  }
+
+  body.light input,
+  body.light textarea,
+  body.light select{
+    background:#e2e8f0;
+    color:black;
+  }
+
+  /* PURPLE THEME */
+  body.purple{
+    background:linear-gradient(135deg,#1e1b4b,#7c3aed);
+  }
+</style>
+
+<script>
+  const profileName = document.getElementById("profileName");
+  const profileBio = document.getElementById("profileBio");
+  const profileImage = document.getElementById("profileImage");
+
+  const nameInput = document.getElementById("nameInput");
+  const bioInput = document.getElementById("bioInput");
+  const imageInput = document.getElementById("imageInput");
+
+  const themeSelect = document.getElementById("themeSelect");
+  const saveBtn = document.getElementById("saveBtn");
+
+  function loadProfile(){
+    const savedName = localStorage.getItem("profileName");
+    const savedBio = localStorage.getItem("profileBio");
+    const savedImage = localStorage.getItem("profileImage");
+    const savedTheme = localStorage.getItem("profileTheme");
+
+    if(savedName) profileName.textContent = savedName;
+    if(savedBio) profileBio.textContent = savedBio;
+    if(savedImage) profileImage.src = savedImage;
+
+    if(savedTheme){
+      document.body.className = savedTheme;
+      themeSelect.value = savedTheme;
+    }
+  }
+
+  saveBtn.addEventListener("click", () => {
+
+    const name = nameInput.value;
+    const bio = bioInput.value;
+    const image = imageInput.value;
+
+    if(name){
+      profileName.textContent = name;
+      localStorage.setItem("profileName", name);
+    }
+
+    if(bio){
+      profileBio.textContent = bio;
+      localStorage.setItem("profileBio", bio);
+    }
+
+    if(image){
+      profileImage.src = image;
+      localStorage.setItem("profileImage", image);
+    }
+
+    document.body.className = themeSelect.value;
+    localStorage.setItem("profileTheme", themeSelect.value);
+
+    alert("Profile Updated!");
+  });
+
+  loadProfile();
+</script>
