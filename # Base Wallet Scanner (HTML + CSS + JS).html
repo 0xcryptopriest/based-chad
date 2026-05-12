@@ -1,0 +1,229 @@
+# Base Wallet Scanner (HTML + CSS + JS)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base Wallet Scanner</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    .scanner-container{
+      width:100%;
+      max-width:500px;
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(12px);
+      border-radius:22px;
+      padding:30px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .scanner-header{
+      text-align:center;
+      margin-bottom:25px;
+    }
+
+    .scanner-header h1{
+      font-size:2rem;
+      margin-bottom:8px;
+    }
+
+    .scanner-header p{
+      opacity:0.7;
+      font-size:14px;
+    }
+
+    .input-group{
+      margin-bottom:20px;
+    }
+
+    input{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      background:#1e293b;
+      color:white;
+      outline:none;
+      font-size:15px;
+    }
+
+    button{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      background:#0052ff;
+      color:white;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+    }
+
+    .result-box{
+      margin-top:25px;
+      background:#111827;
+      border-radius:18px;
+      padding:20px;
+      display:none;
+    }
+
+    .wallet-address{
+      word-break:break-all;
+      font-size:13px;
+      opacity:0.8;
+      margin-bottom:20px;
+    }
+
+    .info-row{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:14px;
+      padding-bottom:14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .info-row:last-child{
+      border:none;
+      margin-bottom:0;
+      padding-bottom:0;
+    }
+
+    .label{
+      opacity:0.7;
+    }
+
+    .value{
+      font-weight:bold;
+    }
+
+    .status{
+      margin-top:20px;
+      text-align:center;
+      font-size:14px;
+      opacity:0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scanner-container">
+
+    <div class="scanner-header">
+      <h1>Base Wallet Scanner</h1>
+      <p>Scan wallet balances and activity on Base</p>
+    </div>
+
+    <div class="input-group">
+      <input
+        type="text"
+        id="walletInput"
+        placeholder="Enter Base wallet address"
+      >
+    </div>
+
+    <button onclick="scanWallet()">
+      Scan Wallet
+    </button>
+
+    <div class="result-box" id="resultBox">
+
+      <div class="wallet-address" id="walletAddress"></div>
+
+      <div class="info-row">
+        <span class="label">ETH Balance</span>
+        <span class="value" id="ethBalance">0 ETH</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Transactions</span>
+        <span class="value" id="txCount">0</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Network</span>
+        <span class="value">Base</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Status</span>
+        <span class="value">Active</span>
+      </div>
+
+      <div class="status" id="statusText">
+        Wallet data loaded successfully
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    async function scanWallet(){
+
+      const wallet = document.getElementById('walletInput').value;
+      const resultBox = document.getElementById('resultBox');
+
+      if(!wallet){
+        alert('Please enter a wallet address');
+        return;
+      }
+
+      resultBox.style.display = 'block';
+
+      document.getElementById('walletAddress').textContent = wallet;
+      document.getElementById('statusText').textContent = 'Scanning wallet...';
+
+      try{
+
+        // Example mock scanner data
+        // Replace with BaseScan or Alchemy API later
+
+        setTimeout(() => {
+
+          const randomBalance = (Math.random() * 5).toFixed(4);
+          const randomTx = Math.floor(Math.random() * 1000);
+
+          document.getElementById('ethBalance').textContent = `${randomBalance} ETH`;
+          document.getElementById('txCount').textContent = randomTx;
+
+          document.getElementById('statusText').textContent = 'Wallet scan completed';
+
+        }, 1500);
+
+      } catch(error){
+
+        document.getElementById('statusText').textContent = 'Failed to scan wallet';
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
